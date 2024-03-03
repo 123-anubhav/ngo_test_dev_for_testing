@@ -1,0 +1,46 @@
+  /* Reset 
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+     Full height
+    html,
+    body,
+    #page,
+    #content {
+        min-height: 100%;
+        height: 100%;
+    }
+
+    /* Fixed-width left column 
+    #page {
+        background: red;
+        position: relative;
+    }
+    background: linear-gradient(to right, #ff105f, #ffad06);
+*/
+/*body{
+    background: linear-gradient(to right, #CD5C5C	, #FF69B4,#FFDAB9,#CD5C5C,#000080);
+    /*background-image: url('css/banner09.jfif');*/
+/*}*/
+ 
+#content {
+    /*background:wheat;*/
+    margin-left: 190px;
+    padding: 10px;
+}
+
+#menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    padding: 10px;
+    background-color: Wheat;
+    
+}
+
+table,td{
+	border: thin solid;
+}

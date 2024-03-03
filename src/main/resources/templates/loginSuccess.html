@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+<style>
+/* Custom styles for the vertical menu */
+.vertical-menu {
+	width: 200px; /* Adjust as needed */
+}
+
+.horizontal-menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+.marq {
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+</style>
+
+<main>
+    <!-- Your main content goes here -->
+    <div style="text-align: center;" id="content">
+    <!-- Accessing session attribute -->
+<div th:text="${session.mobileNumber}">Mobile Number: </div>
+    
+    
+    <div id="content">
+    <marquee class="marq" style="color: #ffffff; background-color: #333333;" direction="left" loop="1">
+        <h4><!-- हमारे टेलीग्राम समूह में शामिल होना अनिवार्य है  -->हमारे साथ जुड़ें। एवं आपको नवीनतम अपडेट और समाचार भी मिलेंगे, इसलिए कृपया टेलीग्राम समूह के साथ जुड़े|</h4>
+    </marquee>
+    
+     <div class="d-flex justify-content-end">
+    
+      <button class="btn btn-secondary"> 
+                    <a class="nav-link"
+					th:href="@{/myDonationList}" style="color: activeborder;">मेरी
+						डोनेशन लिस्ट</a>
+					</button>
+					
+				 <button class="btn btn-success"> 
+                    <a class="nav-link"
+					th:href="@{/myProfile}" style="color: activeborder;">मेरी
+						प्रोफाइल</a>
+					</button>
+					
+			<button class="btn btn-primary"> 
+                     <a class="nav-link" th:href="@{/logout}"
+					style="color: activeborder; text-align: right;">लॉगआउट</a>
+					</button>	
+				
+   </div>
+    
+    <br>
+    <!-- 
+    <h2>लॉगिन के बाद, होम पेज</h2>
+     -->
+    <!-- Thymeleaf expression for getting user role -->
+    <h3>
+    <!-- 
+        आप किस प्रकार के उपयोगकर्ता हैं ->>  <span th:text="${session.getAttribute('getUserRole')}"></span> 
+        <br><br>
+        यदि आप व्यवस्थापक वाले उपयोगकर्ता हैं तो आप 
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;व्यवस्थापक और रिकॉर्ड हटाएं पेज तक भी पहुंच सकते हैं। 
+        <br> अन्यथा,
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;व्यवस्थापक और रिकॉर्ड हटाएं पेज यूआरएल आपको प्रदर्शित नहीं होगा|<br>
+        <br>
+       -->  
+       <div style="text-align: center;background-color: yellow">
+       हमारे टेलीग्राम समूह में शामिल होना अनिवार्य है 
+       <br>
+        हमारे साथ जुड़ें। टेलीग्राम समूह लिंक है <br><a href="https://web.telegram.org/a/" class="text-primary" >टेलीग्राम link</a>
+        </div>
+    </h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Vertical menu -->
+                <div class="vertical-menu">
+                    <!-- Thymeleaf condition to check user role 
+                    <div th:if="${session.getAttribute('getUserRole')} != null">
+                        <a href="deleteRecord" class="list-group-item list-group-item-action">रिकॉर्ड हटाएं</a>
+                        <a href="admin" class="list-group-item list-group-item-action">व्यवस्थापक</a>
+                    </div>
+                -->    
+                 <!--    
+                    <a href="loginSuccess" class="list-group-item list-group-item-action active">लॉगिन करने के बाद होम पेज</a>
+                    <a href="myDonationList" class="list-group-item list-group-item-action">मेरी दान सूची</a>
+                    <a href="myProfile" class="list-group-item list-group-item-action"><h4>मेरी प्रोफाइल</h4></a>
+                    <a href="vyasthaSulk" class="list-group-item list-group-item-action"><h4>पंजीकरण शुल्क</h4></a>
+                    
+                    <form action="@{/logout}" method="get">
+                        <input type="submit" class="list-group-item list-group-item-action" value="Logout" />
+                    </form>
+         -->            
+                 
+                    <br>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+    
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>

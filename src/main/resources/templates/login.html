@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="scripts/loadPageDynamic.js"></script>
+ <style>
+        button {
+            background-color: #4CAF50;
+            width: 17%;
+            color: orange;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+        }
+
+        form {
+            border: 3px solid #f1f1f1;
+            background-color: PaleGoldenrod;
+            
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 25%;
+            margin: 8px 0;
+            padding: 12px 20px;
+            display: inline-block;
+            border: 2px solid green;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            opacity: 0.7;
+        }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            margin: 10px 5px;
+        }
+
+        .container {
+            padding: 25px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+    <!-- Your main content goes here -->
+    
+
+
+
+ <div class="container" id="content">
+        <center>
+            <h1>उपयोगकर्ता लॉगिन पृष्ठ</h1>
+        </center>
+        <form action="loginSuccess" method="post">
+
+
+
+         <div class="container">
+         
+         
+               <div style="text-align: center;">
+                <label>उपयोगकर्ता मोबाइल नंबर :</label> <br>
+                <input type="text" placeholder="Enter mobile number" th:name="username" required>
+                </div>
+                <div style="text-align: center;">
+                <label>पासवर्ड :</label> <br>
+                <input type="password" placeholder="Enter password" th:name="password" required> 
+                </div>
+                <center>
+                <button type="submit" style="background-color: teal">लॉग इन करें</button>
+                </center>
+                <br>
+         </form>
+    </div>
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+ <th:block th:include="footer"></th:block>
+</body>
+</html>

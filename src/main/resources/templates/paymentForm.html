@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stripe Payment Gateway Integration</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<!--
+<script>
+        // Function to close the current window
+        function closeWindow() {
+            window.close();
+        }
+        
+        // Function to navigate back to the main page
+        function navigateBack() {
+            window.location.href = 'register';
+        }
+        
+        // Listener for form submission
+        function onSubmitForm() {
+            // Perform form submission
+            // Assuming the form submission is successful
+            // Close the current window and navigate back to the main page
+            closeWindow();
+            navigateBack();
+        }
+    </script>
+   -->  
+    <h2>Make Payment</h2>
+    <form action="/processPayment" method="post" id="paymentForm" style="background-color: aqua">
+        <input type="text" name="amount" value="100" readonly> <!-- Default amount is $10 => value="1000"-->
+        <div class="form-row">
+            <label for="card-element">
+                Enter Your Card Details 
+            </label>
+            <div id="card-element">
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert"></div>
+        </div>
+
+        <button type="submit">Submit Payment</button>
+    </form>
+
+    <script>
+        // Create a Stripe client.
+        var stripe = Stripe('pk_test_51NjOJBSFx3mRYZpp3liUKgdVtbNH5HX8zZ1NLWtAyIUJrJOTDyH19atAYwObPvuYAE6S4IT6UsUirLqV6bCkjanT00yA0TxD5h');
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Create an instance of the card Element.
+        var card = elements.create('card');
+
+        // Add an instance of the card Element into the `card-element` div.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('paymentForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server.
+            var form = document.getElementById('paymentForm');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form.
+            form.submit();
+        }
+    </script>
+</body>
+</html>

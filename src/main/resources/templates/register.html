@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="scripts/loadPageDynamic.js"></script>
+ <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        form {
+            border: 3px solid #f1f1f1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+    <!-- Your main content goes here -->
+    <div id="content" style="background-color: PaleGreen">
+    
+    <form action="save" method="post" enctype="multipart/form-data" >
+    
+		<h3 style="width: 65%;text-align: center;">उपयोगकर्ता पंजीकरण पेज </h3>
+<!--	<h4>[${message}]</h4> <br />-->
+		<h3 th:text="${message}"></h3>
+
+		<div class="container">
+<!-- 
+			<form action="register" method="post" enctype="multipart/form-data">
+ -->
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+<!--				
+				<%
+				String getUserRole = (String) session.getAttribute("getUserRole");
+				if (getUserRole != null) {
+					if (getUserRole.contains("ROLE_ADMIN")) {
+				%>
+				<div style="text-align: right;">
+					<a href="deleteRecord"><h4>रिकॉर्ड हटाएं</h4></a><br>
+					<a href="admin"><h4>व्यवस्थापक</h4></a>
+				</div>
+				<%
+				}
+				}
+				%>
+				<a href="loginSuccess">loginSuccess</a> <br>
+				<a href="myDoantionList"><h4>मेरी दान सूची</h4></a><br>
+				<br>
+				<a href="myProfile"><h4>मेरी प्रोफाइल</h4></a><br>
+				<a href="vyasthaSulk"><h4>पंजीकरण शुल्क</h4></a><br>
+				<a href="logout"><h4>लॉगआउट</h4></a><br>
+				 <a href="user">user</a>
+				<br>
+				
+ <br>
+		getUserRole is = <%= getUserRole%><br>
+		 -->
+				<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="name" class="form-label">नाम दर्ज करें :</label>
+            <input type="text" id="name" name="userName" class="form-control" placeholder="Enter name..."><br>
+            <label for="fathername" class="form-label">पिता/पति/पत्नी का नाम दर्ज करें :</label>
+            <input type="text" id="fathername" name="userFatherName" class="form-control" placeholder="Fathername..."><br>
+            <label for="date-of-birth" class="form-label">जन्म की तारीख[ validation *age-limit->{21-65 allowed}]:</label>
+            <input type="date" name="dob" class="form-control"><br>
+            <label class="form-label">लिंग</label>
+            <div class="form-check">
+                <input type="radio" name="gender" id="male" value="male" class="form-check-input">
+                <label for="male" class="form-check-label">पुरुष</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="gender" id="female" value="female" class="form-check-input">
+                <label for="female" class="form-check-label">महिला</label>
+            </div><br>
+            <label for="bloodgroup" class="form-label">आपका रक्त समूह</label>
+            <select name="bloodgroup" class="form-select" placeholder="Blood group...">
+                <option value="A+">ए+</option>
+                <option value="A-">ए-</option>
+                <option value="B+">बी+</option>
+                <option value="B-">बी-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">एबी+</option>
+                <option value="AB-">एबी-</option>
+            </select><br>
+            <label for="emailid" class="form-label">मोबाइल नंबर दर्ज करें (स्वयं):</label>
+            <input type="text" id="emailid" name="emailId" class="form-control" placeholder="Mobile Number"><br>
+        </div>
+        <div class="col-md-6">
+            <label for="name" class="form-label">वाराणसी के निवास का पता</label><br>
+            <label for="flatNumber" class="form-label">(ए) फ्लैट नंबर :</label>
+            <input type="text" id="flatNumber" name="flatNumber1" class="form-control" placeholder="Flat Number..."><br>
+            <label for="gali" class="form-label">(बी) गली दर्ज करें :</label>
+            <input type="text" id="gali" name="gali1" class="form-control" placeholder="Gali..."><br>
+            <label for="mohalla" class="form-label">(सी) मुहल्ला/गांव दर्ज करें :</label>
+            <input type="text" id="mohalla" name="mohalla1" class="form-control" placeholder="Mohalla..."><br>
+        </div>
+    </div>
+</div>
+
+		<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="nivas" class="form-label">(डी) निवास का क्षेत्र :</label>
+            <select name="nivas1" id="nivas" class="form-select">
+                <option value="city">शहर</option>
+                <option value="village">गांव</option>
+            </select><br>
+            <label for="block" class="form-label">ब्लॉक :</label>
+            <select name="block1" id="block" class="form-select">
+                <option value="city">ब्लॉक A</option>
+                <option value="village">ब्लॉक B</option>
+            </select><br>
+            <label for="ward" class="form-label">वार्ड :</label>
+            <select name="ward1" id="ward" class="form-select">
+                <option value="ward">वार्ड A</option>
+                <option value="ward">वार्ड B</option>
+            </select><br>
+            <label for="thana" class="form-label">(ई)थाना :</label>
+            <input type="text" id="thana" name="thana1" class="form-control" placeholder="Thana..."><br>
+            <label for="nearFamousPlace1" class="form-label">(च) भूमि चिन्ह (प्रसिद्ध स्थान के निकट) :</label>
+            <input type="text" id="nearFamousPlace1" name="nearFamousPlace1" class="form-control" placeholder="Near Famous Place..."><br>
+            <label for="janpad1" class="form-label">(छ) जनपद :</label>
+            <input type="text" id="janpad1" name="janpad1" class="form-control" value="varanasi" placeholder="Janpad..." readonly><br>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">स्थायी पता :</label>
+            <label for="flatNumber" class="form-label">(ए) फ्लैट नंबर :</label>
+            <input type="text" id="flatNumber" name="flatNumber" class="form-control" placeholder="Flat Number..."><br>
+            <label for="gali" class="form-label">(बी) गली में प्रवेश दर्ज करें :</label>
+            <input type="text" id="gali" name="gali" class="form-control" placeholder="Gali..."><br>
+            <label for="mohalla" class="form-label">(सी) मुहल्ला/गांव दर्ज करें :</label>
+            <input type="text" id="mohalla" name="mohalla" class="form-control" placeholder="Mohalla..."><br>
+            <label for="nivas" class="form-label">(डी) निवास का क्षेत्र :</label>
+            <select name="nivas" id="nivas" class="form-select">
+                <option value="city">शहर</option>
+                <option value="village">गांव</option>
+            </select><br>
+            <label for="block" class="form-label">ब्लॉक :</label>
+            <select name="block" id="block" class="form-select">
+                <option value="city">ब्लॉक A</option>
+                <option value="village">ब्लॉक B</option>
+            </select><br>
+            <label for="ward" class="form-label">वार्ड :</label>
+            <select name="ward" id="ward" class="form-select">
+                <option value="ward">वार्ड A</option>
+                <option value="ward">वार्ड B</option>
+            </select><br>
+            <label for="thana" class="form-label">(ई)थाना :</label>
+            <input type="text" id="thana" name="thana" class="form-control" placeholder="Thana..."><br>
+            <label for="name" class="form-label">(च) भूमि चिन्ह (प्रसिद्ध स्थान के निकट) :</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="John Abraham"><br>
+            <label for="janpad" class="form-label">(छ) जनपद :</label>
+            <input type="text" id="janpad" name="janpad" class="form-control" value="varanasi" placeholder="Janpad..." readonly><br>
+        </div>
+    </div>
+</div>
+				<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="nomineeName" class="form-label">नामांकित व्यक्ति का नाम दर्ज करें :</label>
+            <input type="text" id="nomineeName" name="nomineeName" class="form-control" placeholder="Enter Name..."><br>
+            <label for="nomineeAccountNumber" class="form-label">नामांकित खाता संख्या दर्ज करें :</label>
+            <input type="text" id="nomineeAccountNumber" name="nomineeAccountNumber" class="form-control" placeholder="Enter Account Number..."><br>
+            <label for="nomineeIFSCCode" class="form-label">नामांकित व्यक्ति का IFSC कोड दर्ज करें :</label>
+            <input type="text" id="nomineeIFSCCode" name="nomineeIFSCCode" class="form-control" placeholder="Enter IFSC Code..."><br>
+            <label for="nomineeBranchName" class="form-label">नामांकित शाखा का नाम दर्ज करें :</label>
+            <input type="text" id="nomineeBranchName" name="nomineeBranchName" class="form-control" placeholder="Enter Branch Name..."><br>
+            <label for="nomineeBankName" class="form-label">नामांकित बैंक का नाम दर्ज करें :</label>
+            <input type="text" id="nomineeBankName" name="nomineeBankName" class="form-control" placeholder="Enter Bank Name..."><br>
+            <label for="jobName" class="form-label">आपका काम/क्या काम करते हैं लिखे :</label>
+            <input type="text" id="jobName" name="jobName" class="form-control" placeholder="Enter Job..."><br>
+            <label class="form-label">कार्य का पता हाँ/नहीं :</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="workPlaceExist" id="yes" value="yes">
+                <label class="form-check-label" for="yes">हाँ</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="workPlaceExist" id="no" value="no">
+                <label class="form-check-label" for="no">नहीं</label>
+            </div>
+            <input type="text" name="workAddress" class="form-control" placeholder="पूरा पता भरें, यदि हाँ..."><br>
+            <label for="maritalstatus" class="form-label">वैवाहिक स्थिति :</label>
+            <select name="maritalstatus" class="form-select">
+                <option value="vivahit">विवाहित</option>
+                <option value="a-vivahit">अ-विवाहित</option>
+                <option value="divorcy">तलाकशुदा</option>
+                <option value="vidhoor">विधूर</option>
+            </select><br>
+        </div>
+        <div class="col-md-6">
+            <label for="emailid" class="form-label">ईमेल आईडी दर्ज करें:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber" class="form-control" placeholder="Enter Email ID..."><br>
+            <label for="whatsappmobnumber" class="form-label">व्हाट्सएप मोबाइल नंबर दर्ज करें :</label>
+            <input type="text" id="whatsappmobnumber" name="whatsappMobileNumber" class="form-control" placeholder="Enter WhatsApp Mobile Number..."><br>
+            <label for="password" class="form-label">पास वर्ड दर्ज करें :</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password..."><br>
+            <label for="cpassword" class="form-label">पासवर्ड की पुष्टि कीजिये :</label>
+            <input type="password" id="cpassword" name="confirmPassword" class="form-control" placeholder="Confirm Password..."><br>
+            <!-- USER ROLES
+            <label class="form-check-label">ROLES :</label><br>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="userRoles" value="ADMIN">
+                <label class="form-check-label" for="myCheckbox">ADMIN</label>
+            </div>
+             -->
+            <div class="form-check">
+                <input class="form-check-input" type="hidden" name="userRoles" value="CUSTOMER" id="myCheckbox">
+               <!--  <label class="form-check-label" for="myCheckbox">CUSTOMER</label> -->
+            </div>
+            <!-- 
+            <label for="file" class="form-label">Testing of upload payment registration receipt/image</label>
+            <input type="file" name="file" class="form-control-file">
+             -->
+        </div>
+    </div>
+</div>
+				
+				<script>
+// Get the checkbox element by its ID
+var checkbox = document.getElementById("myCheckbox");
+//var agree = document.getElementById("agree");
+
+// Check the checkbox automatically
+checkbox.checked = true;
+//agree.checked = true;
+</script>
+
+
+		<br>
+		<!--
+				
+				========================================= <label for="name">स्वयं
+					की छवि अपलोड करें :</label>
+				<div id="my_camera" style="width: 320px; height: 240px;"></div>
+				<div id="my_result" name="selfie"></div>
+
+				<script language="JavaScript">
+					Webcam.attach('#my_camera');
+
+					function take_snapshot() {
+						Webcam
+								.snap(function(data_uri) {
+									/*
+									const formData = new FormData();
+									formData.append("selfie", data_uri);
+									*/
+									console.log("img data is : "+ data_uri);
+									document.getElementById('my_result').innerHTML = '<img src="' + data_uri + '"/>';
+								});
+					}
+				</script>
+ 
+				<a href="javascript:void(take_snapshot())"
+					style="background-color: #b7bdcf">आशुचित्र लेंt</a> 
+					-->
+
+		<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <label for="name" class="form-label">सूचना: यह आपको हमारे नियमों और दिशानिर्देशों के बारे में सूचित करने के लिए है, इसलिए कृपया देखभाल के साथ पढ़ें</label>
+            <input type="checkbox" id="agree" name="iAgreeRules" class="form-check-input">
+            <br>
+            <h3 class="mt-3">
+                <label for="name" class="form-label">हमारी संस्था से जुड़ने के लिए १०० रुपये का भुगतान करें</label>
+                <!-- <a href="paymentForm" class="btn btn-primary">Pay Now</a> -->
+            </h3>
+        </div>
+    </div>
+</div>
+					
+		<br><center>
+					<button onclick="windowOpen()"> <h6> अभी भुगतान करें और पंजीकरण करें</h6> </button> 
+					</center>					
+					<script>  
+    // function to open the new window tab with specified size  
+    function windowOpen() {   
+         var newWindow = window.open(   
+		 15.206.127.148
+		  "http://15.206.127.148:9191/paymentForm", "_blank", "width=500, height=350");
+             // "http://localhost:9191/paymentForm", "_blank", "width=500, height=350");   
+    }   
+    
+   // function to close the window opened by window.open()   
+   function windowClose() {   
+         newWindow.close();   
+   }   
+</script>  
+ 
+<!-- 
+ <b> Click the button to open Javatpoint tutorial site </b><br>  
+    <button onclick="windowOpen()"> Open Javatpoint </button>  
+    <br><br>   
+    <b> Click the button to close Javatpoint tutorial site </b><br>  
+    <button onclick="windowClose()"> Close Javatpoint </button>
+	 -->				
+					<br>
+					<br><!--
+					${message}  -->
+					<!--
+					<br>
+					<label
+						for="name">टेलीग्राम लिंक और फ्लैश करेगा :</label>
+				</h3> -->
+				<!-- 
+				<br>
+				 <input type="submit" value="पंजीकरण करवाना" style="background-color: #b7bdcf">
+					 -->
+			</form>
+		</div>
+	</div>
+    
+    		
+    </div>
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>

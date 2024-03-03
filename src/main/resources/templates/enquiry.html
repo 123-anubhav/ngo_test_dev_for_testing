@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<style>   
+    button {   
+           background-color: #4CAF50;   
+           width: 16%;  
+            color: orange;   
+            padding: 15px;   
+            margin: 10px 0px;   
+            border: none;   
+            cursor: pointer;   
+             }   
+     form {   
+            border: 3px solid #f1f1f1;   
+        }   
+     input[type=text], input[type=password] {   
+            width: 40%;   
+            margin: 8px 0;  
+            padding: 12px 20px;   
+            display: inline-block;   
+            border: 2px solid green;   
+            box-sizing: border-box;   
+        }  
+     button:hover {   
+            opacity: 0.7;   
+        }        
+     .container {   
+            padding: 25px;   
+           
+        }   
+    </style>   
+<main>
+    <!-- Your main content goes here -->
+    
+    <div id="content">
+    <div class="container">
+     <h1 th:text="${message}">Default Message</h1>
+        <center><h1>संपर्क करें</h1></center>
+        <form th:action="@{/enquiryPost}" method="post">
+            <div class="container">
+                <label>नाम/query headline :</label><br>
+                <input type="text" placeholder="Enter NAME" name="name" required><br>
+                <label>ईमेल आईडी :</label><br>
+                <input type="text" placeholder="Enter EMAILID" name="emailId" required><br>
+                <label>मोबाइल नंबर :</label><br>
+                <input type="text" placeholder="Enter MOBNUMBER" name="mobileNumber" required><br>
+                <label>प्रश्न पूछें :</label><br>
+                <textarea rows="8" cols="60" placeholder="Enter Query" name="query" required></textarea><br>
+                <button type="submit" style="background-color: teal">जमा करना</button>
+            </div>
+        </form>
+    </div>
+</div>
+    
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>

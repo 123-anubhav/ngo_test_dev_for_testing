@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+
+<script src="js/jquery.js"></script>
+<script src="media/js/jquery.dataTables.min.js"></script>
+<link href="media/css/jquery.dataTables.min.css" rel="stylesheet">
+<script>
+	$(document).ready(function() {
+		$("#myTable").dataTable();
+	});
+</script>
+
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+    <!-- Your main content goes here -->
+    <div id="content">
+<!-- plan validity check data is available or not
+<input type="text"th:value="${findByIdDateCounter}" >dsds<br>
+
+<input type="text" id="dateInput" th:value="${findByIdDateCounter}"/>
+ -->
+ 
+ 
+<div style="text-align: center;background-color: yellow"> 
+<label>plan valid till date</label> 
+<input type="text"  th:value="${planValidityExtended}" readonly/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>plan valid till numberof days </label> 
+<input type="text"  th:value="${planValidityNumberOfDays}" readonly/>
+</div>
+<!-- Assume myDate is a variable holding a numeric value -->
+ <h4><a href="payVyasthaSulk">अभी दान कीजिए</a></h4>
+<div th:if="${planValidityNumberOfDays <= 0}" class="container" style="text-align: center;">
+
+        <p><h2>व्यवस्था शुल्क नहीं जमा है</h2>
+        <p>आपने वार्षिक शुल्क जमा नही की है| कृपया व्यवस्था शुल्क ससमय
+            दान करें|</p>
+            <h4><a href="payVyasthaSulk">अभी दान कीजिए</a></h4>
+        </p>
+    </div>
+    <div th:if="${planValidityNumberOfDays > 0}" class="container" style="text-align: center;">
+    
+        <p>
+         <h2>व्यवस्था शुल्क जमा है |</h2>
+        <p>व्यवस्था शुल्क वार्षिक है,जो जमा
+            करने की तिथि से १ वर्ष तक मान्य है|<br>
+            सेल्फ केयर संचालन हेतु व्यवस्था
+            शुल्क प्रत्येक वर्ष जमा करना अनिवार्य है|
+        </p>
+        <!-- 
+        planValidity value is <input type="text" id="dateInput" th:value="${planValidity}" readonly/></p> -->
+    </div>
+    
+    
+
+
+
+
+<!-- 
+<div class="card-body">
+<div class="form-group">
+    <label for="counterResult">Result-upara wala scritp se aa ra h</label>
+	<input type="text" id="dateCounter" />==> date text input coming
+     </div>
+ </div>
+  -->
+    <!-- Script to calculate the difference between the input date and the current date 
+    <script th:inline="javascript">
+    //alert("inside script date plan")
+        /*<![CDATA[*/
+        var dateInput = document.getElementById('dateInput').value;
+        var inputDate = new Date(dateInput);
+        var currentDate = new Date();
+        var differenceInMilliseconds = currentDate - inputDate;
+        var differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+        console.log("Difference in days: " + differenceInDays);
+        document.getElementById('dateCounter').value=differenceInDays;
+        
+        
+        //alert("differenceInDays"+differenceInDays)
+        // Assuming you have a list to store date differences
+        var dateDifferences = [];
+
+        // Push the calculated difference into the list
+        dateDifferences.push(differenceInDays);
+
+        // Sort the list in descending order
+        dateDifferences.sort(function(a, b) {
+            return b - a;
+        });
+
+        // Iterate over the sorted list to display date counters
+        dateDifferences.forEach(function(difference) {
+            console.log("Date counter for " + difference + " days");
+            // You can do further processing or display here
+        });
+        /*]]>*/
+    </script>
+ -->
+  </div>    
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>

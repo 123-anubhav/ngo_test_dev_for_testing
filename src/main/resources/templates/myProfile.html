@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="scripts/loadPageDynamic.js"></script>
+ <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        form {
+            border: 3px solid #f1f1f1;
+        }
+    </style>
+
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+<br>
+    <!-- Your main content goes here -->
+    <div id="content" style="text-align: center;background-color: PaleGoldenrod;">
+    
+     <div class="d-flex justify-content-end">
+    
+      <button class="btn btn-secondary"> 
+                    <a class="nav-link"
+					th:href="@{/myDonationList}" style="color: activeborder;">मेरी
+						डोनेशन लिस्ट</a>
+					</button>
+					
+				<button class="btn btn-success">	
+					<a class="nav-link" th:href="@{/loginSuccess}"
+					style="color: activeborder;"> लॉग इन के बाद होम पेज </a>
+				</button>
+			<button class="btn btn-primary"> 
+                     <a class="nav-link" th:href="@{/logout}"
+					style="color: activeborder; text-align: right;">लॉगआउट</a>
+					</button>	
+				
+   </div>
+    
+    <center>
+        <h1>प्रोफ़ाइल संपादित करें/Edit Profile</h1>
+    </center>
+    <!--
+         this will create new user 
+            yha pe edit bnan h 
+    -->
+    <form action="register" method="post">
+    	 <div class="form-group">
+            <label>उपयोगकर्ता नाम : </label>  <input type="text" placeholder="Enter Username" name="username" required> <br>
+            <label>पासवर्ड : </label>  <input type="password" placeholder="Enter Password" name="password" required> <br>
+            <label>संगठन का नाम</label> <input id="inputOrgName" type="text" placeholder="Enter your organization name" th:value="StartBootstrap"> <br> 
+           
+            <label>ईमेल पता</label> 
+             <input id="inputEmailAddress" type="email" placeholder="Enter your email address" th:value="name_example.com"> <br> 
+         
+            <label>फोन संख्या</label> <input id="inputPhone" type="tel" placeholder="Enter your phone number" th:value="555-123-4567"> <br> 
+           
+            <label>जन्मतिथि</label> <input id="inputBirthday" name="birthday" placeholder="Enter your birthday" type="date" th:value="1988-06-10"> <br>
+           <br>
+            <button type="submit" style="background-color: teal">अपडेट / सेव करें</button>
+           
+        </div>
+    <br>
+    </form>
+    </div>
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>s
+</body>
+</html>

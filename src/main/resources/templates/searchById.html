@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+<script src="js/jquery.js"></script>
+<script src="media/js/jquery.dataTables.min.js"></script>
+<link href="media/css/jquery.dataTables.min.css" rel="stylesheet">
+<script>
+	$(document).ready(function() {
+		$("#myTable").dataTable();
+	});
+</script>
+
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+    <!-- Your main content goes here -->
+    <div id="content">
+    <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">क्र.सं.</th>
+                <th scope="col">मृत व्यक्ति का नाम</th>
+                <th scope="col">मृत व्यक्ति नामांकित व्यक्ति का नाम</th>
+                <th scope="col">मृत व्यक्ति की तिथि</th>
+                <th scope="col">कुल सहायता राशि</th>
+                <th style="background-color: olive">अन्य विवरण</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Thymeleaf iteration for displaying data -->
+            <tr th:each="dataValue, loop : ${findById}">
+                <td th:text="${loop.index + 1}"></td>
+                <td th:text="${dataValue.userName}"></td>
+                <td th:text="${dataValue.password}"></td>
+                <td th:text="${dataValue.mohalla1}"></td>
+                <td th:text="${dataValue.whatsappMobileNumber}"></td>
+                <td><a  th:href="@{/donationById/{userId}(userId=${dataValue.userId})}">दान देखें</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>

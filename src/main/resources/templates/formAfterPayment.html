@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+</head>
+<body>
+	<header>
+		<!-- Placeholder for dynamically loaded content in the header -->
+		<div id="headerContentPlaceholder">
+			<!-- Content will be loaded here -->
+		</div>
+	</header>
+
+	<main>
+		<!-- Your main content goes here -->
+		<div id="content">
+			<center>
+				<br>
+				
+				<div class="container" style="background-color: Khaki">
+					<div th:text="${status}" style="background-color: aqua;"></div>
+					<div>
+						
+						<h2>
+							यह जांचने के लिए कि आपने वास्तव में भुगतान की गई राशि का <br>
+							भुगतान किया है या नहीं, हमारी पुष्टि के लिए फॉर्म भरें <br>
+							अन्यथा आप इस सेल्फकेयर NGO का लाभ नही उठा पाएंगे
+						</h2>
+					</div>
+					<div class="form-group" style="background-color: DarkKhaki">
+						<br>
+						<form th:action="@{/fillFormAfterPaymentPost}" 	enctype="multipart/form-data" method="post">
+						
+						
+ 
+						
+							<table>
+								<tr>
+									<td><label> अपना नाम दर्ज करें </label></td>
+									<td><input type="text" name="name"></td>
+								</tr>
+								 
+								<tr>
+									<td><label> अपना मोबाइल संख्या दर्ज करे </label></td>
+									<td><input type="text" name="mobileNumber"></td>
+								</tr>
+								 
+								 <tr>
+									<td><label> अपना emailId दर्ज करे </label></td><!-- field email value is mobile number -->
+									<td><input type="text" name="emailId"></td>
+								</tr>
+								 
+								<tr>
+									<td><label> amount transfered in INR<!-- / भारतीय रुपया में हस्तांतरित राशि  --></label></td>
+									<td><input type="text" name="amount"></td>
+								</tr>
+								<tr>
+									<td><label> Enter transfer transaction Id<!--  स्थानांतरण लेनदेन आईडी दर्ज करें -->
+									</label></td>
+									<td><input type="text" name="transactionId"></td>
+								</tr>
+								<tr>
+									<td><label>प्राप्त कर्ता खाता संख्या दर्ज करें </label></td>
+									<td><input type="text" name="payeeAccountNumber"></td>
+								</tr>
+								<tr>
+									<td><label> प्राप्त कर्ता UPI-आईडी दर्ज करें </label></td>
+									<td><input type="text" name="payeeUpiId"></td>
+								</tr>
+								<tr>
+									<td><label> भुगतानकर्ता खाता संख्या दर्ज करें </label></td>
+									<td><input type="text" name="payerAccountNumber"></td>
+								</tr>
+								<tr>
+									<td><label> भुगतानकर्ता UPI-आईडी दर्ज करें </label></td>
+									<td><input type="text" name="payerUpiId"></td>
+								</tr>
+								<tr>
+									<td><label> भुगतान रसीद अपलोड करें </label></td>
+									<td><input name="file" type="file"></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: center;"><input
+										type="submit" value="जमा करना"
+										style="background-color: #b7bdcf"></td>
+								</tr>
+							</table>
+						</form>
+
+					</div>
+				</div>
+			</center>
+	</main>
+
+	<!-- Link to trigger dynamic loading of header content -->
+	<a href="/main-page" id="loadHeaderContent" style="display: none;"></a>
+
+	</div>
+	<footer>
+		<th:block th:include="footer"></th:block>
+	</footer>
+</body>
+</html>

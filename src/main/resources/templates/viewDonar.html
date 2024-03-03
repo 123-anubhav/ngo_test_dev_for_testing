@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<!-- Latest compiled and minified CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="scripts/loadPageDynamic.js"></script>
+
+
+<script src="js/jquery.js"></script>
+<script src="media/js/jquery.dataTables.min.js"></script>
+<link href="media/css/jquery.dataTables.min.css" rel="stylesheet">
+<script>
+	$(document).ready(function() {
+		$("#myTable").dataTable();
+	});
+</script>
+
+</head>
+<body>
+
+	<header>
+		<!-- Placeholder for dynamically loaded content in the header -->
+		<div id="headerContentPlaceholder">
+			<!-- Content will be loaded here -->
+		</div>
+	</header>
+
+	<main>
+		<!-- Your main content goes here -->
+
+		<div class="container" id="content">
+			<br>
+			<table class="table table-bordered" id="myTable">
+				<thead>
+					<tr>
+						<th scope="col">क्र.सं.</th>
+						<th scope="col">नाम</th>
+						<th scope="col">पिता / पति का नाम</th>
+						<th scope="col">पता</th>
+						<th scope="col">ब्लॉक</th>
+						<th>वार्ड</th>
+						<th>ज़िला</th>
+						<th>दान राशि</th>
+						<th style="background-color: olive">दान की तिथि</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- yha jpa se model data lakr display krana h db se uska code likhna h -->
+					<tr th:each="dataValue, loop : ${findById}">
+						<td th:text="${loop.index + 1}"></td>
+						<td th:text="${dataValue.userName}"></td>
+						<td th:text="${dataValue.flatNumber1}"></td>
+						<td th:text="${dataValue.mohalla1}"></td>
+						<td th:text="${dataValue.whatsappMobileNumber}"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+
+	<!-- Link to trigger dynamic loading of header content -->
+	<a href="/main-page" id="loadHeaderContent" style="display: none;"></a>
+
+
+	<footer>
+		<th:block th:include="footer"></th:block>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="scripts/loadPageDynamic.js"></script>
+<!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- datatable testing -->
+<script src="js/jquery.js"></script>
+<script src="media/js/jquery.dataTables.min.js"></script>
+<link href="media/css/jquery.dataTables.min.css" rel="stylesheet">
+<script>
+	$(document).ready(function() {
+		$("#myTable").dataTable();
+	});
+</script>
+</head>
+<body>
+
+<header>
+    <!-- Placeholder for dynamically loaded content in the header -->
+    <div id="headerContentPlaceholder">
+        <!-- Content will be loaded here -->
+    </div>
+</header>
+
+<main>
+    <!-- Your main content goes here -->
+    <!--  
+    <input type"text" th:value="${findById}" id="content">jhjhghjg<br>
+     -->
+     
+   <div id="content">
+   <div style="border-left: thin;">
+   
+  
+<!--  button style right side
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary">Button 1</button>
+    <button class="btn btn-secondary">Button 2</button>
+    <button class="btn btn-success">Button 3</button>
+</div>
+ -->
+   <div class="d-flex justify-content-end">
+    
+      <button class="btn btn-secondary"> 
+                    <a class="nav-link"
+					th:href="@{/myProfile}" style="color: activeborder;">मेरी
+						प्रोफाइल</a>
+					</button>
+					
+				<button class="btn btn-success">	
+					<a class="nav-link" th:href="@{/loginSuccess}"
+					style="color: activeborder;"> लॉग इन के बाद होम पेज </a>
+				</button>
+				<button class="btn btn-primary"> 
+                     <a class="nav-link" th:href="@{/logout}"
+					style="color: activeborder; text-align: right;">लॉगआउट</a>
+					</button>
+   </div>
+   <form action="searchById" method="get">
+        <input type="text" id="emailId" name="emailId" placeholder="Enter Mobile Number...">
+        <button id="searchButton">Search My Donation</button>
+    </form>
+       <!--  
+        <div id="searchResult"></div>
+         -->
+    </div>
+    
+    
+    <!--   
+      
+    <script  th:inline="javascript">
+        $(document).ready(function() {
+            $('#searchButton').click(function() {
+            	
+                var emailId = $('#emailId').val();
+                $.ajax({
+                	
+                    type: 'GET',
+                    url: '/searchById',
+                    data: { emailId: emailId },
+                    success: function(response) {
+                    	 // Parse the JSON data               	 
+                    	
+    						/*if (response != null) {
+    		
+    								alert("response.emailId :: "+response.emailId);
+    								alert("response.password"+response.password);
+    						}
+                    	 */
+                        alert("success execute"+ response.emailId+response.password)
+                    	 
+                       // var data = JSON.parse(response); // not wokring bug here 
+                        
+                        // Create a dynamic table
+                        var table = '<table border="1"><tr><th>emailId</th><th>password</th></tr>';
+                       // for (var i = 0; i < data.length; i++) {
+                            table += '<tr><td>' + response.emailId + '</td><td>' + response.password + '</td></tr>';
+                        //}
+                        table += '</table>';
+                        
+                        // Insert the table into the searchResult div
+                        $('#searchResult').html(table);
+                        
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- 
+    
+    
+    <div id="content">
+    <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr style="background-color: gray">
+                <th scope="col">क्र.सं.</th>
+                <th scope="col">donator Name/दानकर्ता का नाम</th>
+                <th>date of donation</th>
+                <th scope="col">donator Address/दानकर्ता का पता</th>
+                <th scope="col">donate upi Id/दान यूपीआई आईडी</th>
+                <th scope="col">donate amount/दान राशि</th>
+                <th scope="col">donation transaction Id/दान लेनदेन आईडी</th>
+                <th>ID</th>
+                <th>ward</th>
+                <th>block</th>
+                <th>district</th>
+                <th style="background-color: aqua">Lt. member name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Thymeleaf iteration for displaying data 
+            <tr th:each="dataValue, loop : ${data}">
+                <td th:text="${loop.index + 1}"></td>
+                <td th:text="${dataValue.userName}"></td>
+                <td th:text="${dataValue.gali1}"></td>
+                <td th:text="${dataValue.flatNumber1}"></td>
+                <td th:text="${dataValue.mohalla1}"></td>
+                <td th:text="${dataValue.whatsappMobileNumber}"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="donation">दान देखें</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    --> 
+</main>
+
+<!-- Link to trigger dynamic loading of header content -->
+<a href="/main-page" id="loadHeaderContent" style="display:none;"></a>
+
+
+<footer>
+<th:block th:include="footer"></th:block>
+</footer>
+</body>
+</html>
